@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Skills from '../components/Skills';
+import Experience from '../components/Experience';
+import Certifications from '../components/Certifications';
+import Projects from '../components/Projects';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+---
+
+<Layout>
+  <Navbar client:load />
+  <main>
+    <Hero client:load />
+    <About client:load />
+    <Skills client:load />
+    <Experience client:load />
+    <Certifications client:load />
+    <Projects client:load />
+    <Contact client:load />
+  </main>
+  <Footer client:load />
+</Layout>
