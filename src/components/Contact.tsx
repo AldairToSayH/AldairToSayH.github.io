@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const PREFERENCE_KEY = 'contactMusicPreference';
+const WEB3FORMS_ACCESS_KEY = '4b08bbb2-1593-4b50-bdc5-563c0b749103';
 const BAR_COUNT = 8;
 const IDLE_BARS = [6, 8, 10, 12, 10, 8, 7, 6];
 
@@ -29,6 +30,7 @@ const Contact: React.FC = () => {
   const [bars, setBars] = useState<number[]>(IDLE_BARS);
   const [hasAnalyser, setHasAnalyser] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const stopVisualizer = () => {
     if (animationFrameRef.current !== null) {
@@ -200,6 +202,44 @@ const Contact: React.FC = () => {
     pauseAudio();
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setSubmitStatus('sending');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: 'Nuevo mensaje desde el portafolio de Aldair Zavala',
+          from_name: 'Portafolio Aldair Zavala',
+          name: formData.get('nombre'),
+          email: formData.get('correo'),
+          message: formData.get('mensaje'),
+          botcheck: formData.get('botcheck'),
+        }),
+      });
+
+      const result = (await response.json()) as { success?: boolean };
+
+      if (!response.ok || !result.success) {
+        throw new Error('Web3Forms submit failed');
+      }
+
+      form.reset();
+      setSubmitStatus('success');
+    } catch {
+      setSubmitStatus('error');
+    }
+  };
+
   return (
     <section id="contact" ref={sectionRef} onClick={handleSectionClick} className="relative overflow-hidden px-5 py-24 sm:px-8">
       <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-violet/50 to-transparent" aria-hidden="true" />
@@ -229,8 +269,10 @@ const Contact: React.FC = () => {
           </div>
         </div>
 
-        <form action="mailto:zavalapisxlpo@gmail.com" method="post" encType="text/plain" className="rounded-3xl border border-border-dim bg-card p-6 shadow-glow-v sm:p-8">
+        <form action="https://api.web3forms.com/submit" method="POST" onSubmit={handleSubmit} className="rounded-3xl border border-border-dim bg-card p-6 shadow-glow-v sm:p-8">
           <div className="grid gap-5">
+            <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+            <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
             <label className="grid gap-2 font-mono text-sm text-teal">
               Nombre
               <input
@@ -263,10 +305,21 @@ const Contact: React.FC = () => {
             </label>
             <button
               type="submit"
-              className="rounded-full bg-violet px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-white shadow-glow-v transition hover:scale-[1.02] hover:bg-violet/90 focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-card"
+              disabled={submitStatus === 'sending'}
+              className="rounded-full bg-violet px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-white shadow-glow-v transition hover:scale-[1.02] hover:bg-violet/90 focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-card disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
             >
-              Enviar mensaje
+              {submitStatus === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
             </button>
+            {submitStatus === 'success' && (
+              <p className="rounded-2xl border border-teal/30 bg-teal/10 px-4 py-3 text-sm font-medium text-teal" role="status">
+                Mensaje enviado correctamente. Te responderé pronto.
+              </p>
+            )}
+            {submitStatus === 'error' && (
+              <p className="rounded-2xl border border-violet/30 bg-violet/10 px-4 py-3 text-sm font-medium text-text-prime" role="alert">
+                No se pudo enviar el mensaje. Inténtalo nuevamente o escríbeme por correo.
+              </p>
+            )}
             <div
               className={`mt-6 rounded-2xl border bg-white/[0.04] p-4 backdrop-blur-xl transition-all duration-300 sm:flex sm:items-center sm:justify-between sm:gap-4 ${
                 isMusicOn
