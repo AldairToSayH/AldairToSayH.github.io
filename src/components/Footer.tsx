@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="border-t border-border-dim px-5 py-10 text-center sm:px-8">
       <div className="mx-auto max-w-7xl">
-        <p className="font-mono text-sm text-text-muted">© 2025 Aldair Zavala · Construido con 💜 en Cusco, Peru</p>
+        <p className="font-mono text-sm text-text-muted">© 2022–2026 Aldair Zavala. All Rights Reserved. Built with Astro, React & Tailwind CSS.</p>
         <div className="mt-5 flex justify-center gap-3">
           {links.map((link) => (
             <a
