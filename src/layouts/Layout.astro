@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  title = 'Aldair Zavala | Portafolio Profesional',
-  description = 'Portafolio profesional de Aldair Zavala, estudiante de Ingeniería de Sistemas e Informática especializado en ciberseguridad, desarrollo de software e infraestructura TI.',
+  title = "Aldair Zavala | Portafolio",
+  description = "Portafolio profesional de Aldair Zavala, estudiante de Ingeniería de Sistemas e Informática especializado en ciberseguridad, desarrollo de software e infraestructura TI.",
 } = Astro.props;
 
 const favicon = `data:image/svg+xml,${encodeURIComponent(
@@ -33,7 +33,9 @@ const favicon = `data:image/svg+xml,${encodeURIComponent(
     />
     <title>{title}</title>
   </head>
-  <body class="bg-void font-body text-text-prime antialiased selection:bg-violet selection:text-white">
+  <body
+    class="bg-void font-body text-text-prime antialiased selection:bg-violet selection:text-white"
+  >
     <slot />
   </body>
 </html>
