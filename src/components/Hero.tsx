@@ -10,7 +10,7 @@ type Dot = {
   phase: number;
 };
 
-const roles = ['Entusiasta en Ciberseguridad', 'Desarrollador de Software', 'Apasionado en redes e Infraestructura TI', 'Experto en Infraestructura TI'];
+const roles = ['Entusiasta en Ciberseguridad', 'Desarrollador de Software', 'Apasionado en redes e Infraestructura TI', 'Competente en Infraestructura TI', '🤪​Portafolio en Betaaa!!'];
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
