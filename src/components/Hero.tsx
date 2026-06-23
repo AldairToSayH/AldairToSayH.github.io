@@ -14,6 +14,7 @@ const roles = ['🤪​Portafolio en Betaaa!!', 'Entusiasta en Ciberseguridad', 
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [roleIndex, setRoleIndex] = useState(0);
   const [visibleChars, setVisibleChars] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -44,6 +45,12 @@ const Hero: React.FC = () => {
 
     return () => window.clearTimeout(timer);
   }, [isDeleting, roleIndex, visibleChars]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75;
+    }
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -81,8 +88,6 @@ const Hero: React.FC = () => {
 
     const draw = (time: number) => {
       context.clearRect(0, 0, width, height);
-      context.fillStyle = '#0A0A0F';
-      context.fillRect(0, 0, width, height);
 
       dots.forEach((dot, index) => {
         dot.x += dot.vx;
@@ -98,7 +103,7 @@ const Hero: React.FC = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 100) {
-            const opacity = (1 - distance / 100) * 0.22;
+            const opacity = (1 - distance / 100) * 0.16;
             context.strokeStyle = `rgba(108, 99, 255, ${opacity})`;
             context.lineWidth = 0.7;
             context.beginPath();
@@ -109,7 +114,7 @@ const Hero: React.FC = () => {
         }
 
         const pulse = 0.3 + Math.sin(time * 0.001 + dot.phase) * 0.2;
-        const alpha = Math.max(0.3, Math.min(0.5, pulse + 0.25));
+        const alpha = Math.max(0.18, Math.min(0.34, pulse + 0.12));
         context.fillStyle = dot.color === '#6C63FF' ? `rgba(108, 99, 255, ${alpha})` : `rgba(0, 212, 170, ${alpha})`;
         context.beginPath();
         context.arc(dot.x, dot.y, dot.size + pulse, 0, Math.PI * 2);
@@ -134,14 +139,28 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-5 py-28 sm:px-8">
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#6C63FF22,transparent_32%),radial-gradient(circle_at_80%_70%,#00D4AA18,transparent_30%)]" aria-hidden="true" />
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden bg-void px-5 py-28 sm:px-8">
+      <video
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/video/hero-video-enhanced.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/62" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,15,0.88)_0%,rgba(10,10,15,0.66)_42%,rgba(10,10,15,0.36)_100%)]" aria-hidden="true" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-45 mix-blend-screen" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#6C63FF2E,transparent_34%),radial-gradient(circle_at_80%_70%,#00D4AA24,transparent_32%)]" aria-hidden="true" />
       <div className="relative z-10 mx-auto w-full max-w-7xl">
-        <div className="max-w-4xl text-center md:text-left">
-          <p className="font-mono text-sm font-semibold uppercase tracking-[0.28em] text-teal sm:text-base">Ingeniero de Sistemas · Cusco, Peru</p>
-          <h1 className="mt-6 font-display text-6xl font-bold leading-none tracking-tight text-white sm:text-7xl md:text-8xl">Aldair Zavala</h1>
-          <p className="mt-7 min-h-12 font-mono text-xl text-text-prime sm:text-2xl">
+        <div className="max-w-4xl text-center [text-shadow:_0_3px_18px_rgb(0_0_0_/_0.72)] md:text-left">
+          <p className="font-mono text-sm font-semibold uppercase tracking-[0.28em] text-teal drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)] sm:text-base">Ingeniero de Sistemas · Cusco, Peru</p>
+          <h1 className="mt-6 font-display text-6xl font-bold leading-none tracking-tight text-white drop-shadow-[0_6px_28px_rgba(0,0,0,0.82)] sm:text-7xl md:text-8xl">Aldair Zavala</h1>
+          <p className="mt-7 min-h-12 font-mono text-xl text-white/95 drop-shadow-[0_3px_16px_rgba(0,0,0,0.78)] sm:text-2xl">
             {roles[roleIndex].slice(0, visibleChars)}
             <span className="ml-1 animate-pulse text-teal">|</span>
           </p>
@@ -156,7 +175,7 @@ const Hero: React.FC = () => {
             <button
               type="button"
               onClick={() => scrollTo('#contact')}
-              className="rounded-full border border-teal px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-teal transition hover:scale-105 hover:bg-teal hover:text-void focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
+              className="rounded-full border border-teal bg-void/20 px-8 py-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-teal shadow-[0_0_22px_rgba(0,0,0,0.28)] backdrop-blur-[2px] transition hover:scale-105 hover:bg-teal hover:text-void focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
             >
               Contactame
             </button>
