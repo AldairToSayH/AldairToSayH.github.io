@@ -3,11 +3,12 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const projects = [
   {
-    title: 'Tarjeta Personal',
-    description: 'Tarjeta personal interactiva construida con tecnologias web modernas.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    icon: 'ID',
-    github: 'https://github.com/AldairToSayH/Tarjeta-Personal/',
+    title: 'APU Luxury',
+    description: 'Marketplace e-commerce multi-tenant para vendedores, artesanos, emprendedores y compradores.',
+    tags: ['Next.js', 'React', 'Node.js', 'PostgreSQL'],
+    icon: 'APU',
+    website: 'https://apuluxury.com',
+    github: 'https://github.com/AldairToSayH/apu-luxury-last',
     disabled: false,
   },
   {
@@ -15,6 +16,7 @@ const projects = [
     description: 'Portafolio personal creado con Astro, React y Tailwind CSS. Totalmente estatico y desplegado en GitHub Pages.',
     tags: ['Astro', 'React', 'Tailwind CSS', 'TypeScript'],
     icon: 'AZ',
+    website: '',
     github: 'https://github.com/AldairToSayH/aldairtosayh.github.io',
     disabled: false,
   },
@@ -23,6 +25,7 @@ const projects = [
     description: 'Un nuevo proyecto esta en desarrollo. Pronto habra novedades.',
     tags: ['Python', 'Machine Learning'],
     icon: 'ML',
+    website: '',
     github: '',
     disabled: true,
   },
@@ -58,14 +61,26 @@ const Projects: React.FC = () => {
                     En desarrollo
                   </button>
                 ) : (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex w-full items-center justify-center rounded-full border border-violet px-5 py-3 font-display text-sm font-bold uppercase tracking-[0.16em] text-violet transition hover:bg-violet hover:text-white focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
-                  >
-                    Ver en GitHub
-                  </a>
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                    {project.website && (
+                      <a
+                        href={project.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-1 items-center justify-center rounded-full border border-teal px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.12em] text-teal transition hover:bg-teal hover:text-void focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
+                      >
+                        Ver página web
+                      </a>
+                    )}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex flex-1 items-center justify-center rounded-full border border-violet px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.12em] text-violet transition hover:bg-violet hover:text-white focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
+                    >
+                      Ver en GitHub
+                    </a>
+                  </div>
                 )}
               </div>
             </article>
