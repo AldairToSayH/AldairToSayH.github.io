@@ -5,30 +5,30 @@ Sitio web de portafolio desarrollado con Astro, React, TypeScript y Tailwind CSS
 ## Requisitos
 
 - Node.js
-- npm
+- pnpm 11
 
 ## Instalacion
 
 ```bash
-npm install
+pnpm install
 ```
 
 ## Comandos
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Inicia el servidor de desarrollo.
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Verifica el proyecto y genera la version de produccion.
 
 ```bash
-npm run preview
+pnpm preview
 ```
 
 Previsualiza la version generada.

@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -6,7 +8,7 @@ interface Props {
 
 const {
   title = "Aldair Zavala | Portafolio",
-  description = "Portafolio profesional de Aldair Zavala, estudiante de Ingeniería de Sistemas e Informática especializado en ciberseguridad, desarrollo de software e infraestructura TI.",
+  description = "Portafolio profesional de Aldair Zavala: ingeniería de sistemas, desarrollo de software, ciberseguridad e infraestructura TI.",
 } = Astro.props;
 
 const favicon = `data:image/svg+xml,${encodeURIComponent(
@@ -24,6 +26,11 @@ const favicon = `data:image/svg+xml,${encodeURIComponent(
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aldairtosayh.github.io" />
+    <meta property="og:image" content="https://aldairtosayh.github.io/og.png" />
+    <meta property="og:image:alt" content="Aldair Zavala — Systems, Software, Security" />
+    <meta name="theme-color" content="#0A0A0F" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://aldairtosayh.github.io/og.png" />
     <link rel="icon" href={favicon} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,9 +40,10 @@ const favicon = `data:image/svg+xml,${encodeURIComponent(
     />
     <title>{title}</title>
   </head>
-  <body
-    class="bg-void font-body text-text-prime antialiased selection:bg-violet selection:text-white"
-  >
+  <body class="bg-void font-body text-text-prime antialiased selection:bg-violet selection:text-white">
+    <a href="#main-content" class="fixed left-4 top-3 z-[100] -translate-y-20 rounded-lg bg-teal px-4 py-2 font-display font-semibold text-void transition focus:translate-y-0">
+      Saltar al contenido
+    </a>
     <slot />
   </body>
 </html>

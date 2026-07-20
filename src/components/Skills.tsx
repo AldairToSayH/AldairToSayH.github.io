@@ -1,59 +1,55 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
+import { StaggerGroup, StaggerItem } from './motion/StaggerGroup';
+import SectionHeading from './ui/SectionHeading';
+import TechIcon from './ui/TechIcon';
+import TiltCard from './ui/TiltCard';
 
 const categories = [
-  { icon: '🔐', name: 'Ciberseguridad', skills: ['Pentesting Web', 'Hacking Etico', 'Kali Linux'] },
-  { icon: '💻', name: 'Programacion', skills: ['Python', 'Node.js', 'React', 'C++'] },
-  { icon: '🗄️', name: 'Bases de Datos', skills: ['MySQL', 'SQL Server'] },
-  { icon: '🌐', name: 'Redes y TI', skills: ['Cisco', 'Gestion de Redes', 'Infraestructura TI'] },
-  { icon: '🛠️', name: 'Herramientas', skills: ['Git', 'GitHub', 'Linux', 'Microsoft Office'] },
+  { icon: 'security' as const, name: 'Ciberseguridad', code: 'SEC-01', skills: ['Pentesting web', 'Hacking ético', 'Kali Linux'], accent: 'teal' },
+  { icon: 'code' as const, name: 'Programación', code: 'DEV-02', skills: ['Python', 'Node.js', 'React', 'C++'], accent: 'violet' },
+  { icon: 'database' as const, name: 'Bases de datos', code: 'DAT-03', skills: ['MySQL', 'SQL Server'], accent: 'teal' },
+  { icon: 'network' as const, name: 'Redes y TI', code: 'NET-04', skills: ['Cisco', 'Gestión de redes', 'Infraestructura TI'], accent: 'violet' },
+  { icon: 'tools' as const, name: 'Herramientas', code: 'OPS-05', skills: ['Git', 'GitHub', 'Linux', 'Microsoft Office'], accent: 'teal' },
 ];
 
-const Skills: React.FC = () => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.18 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
+export default function Skills() {
   return (
-    <section id="skills" ref={sectionRef} className="px-5 py-24 sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="font-mono text-sm font-semibold uppercase tracking-[0.24em] text-teal">// habilidades</p>
-          <h2 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Stack Tecnico</h2>
-          <p className="mt-5 text-lg leading-8 text-text-muted">Un conjunto practico de capacidades para analizar riesgos, construir soluciones y sostener infraestructura digital.</p>
-        </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <section id="skills" className="relative border-y border-white/[0.035] bg-card/[0.22] py-24 sm:py-32">
+      <div className="section-shell">
+        <SectionHeading
+          index="03"
+          eyebrow="habilidades"
+          title="Capacidades conectadas, no herramientas aisladas."
+          description="Un stack práctico para analizar riesgos, construir soluciones y sostener infraestructura digital."
+        />
+        <StaggerGroup className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-6">
           {categories.map((category, index) => (
-            <article
-              key={category.name}
-              style={{ transitionDelay: `${index * 90}ms` }}
-              className={`rounded-2xl border border-border-dim border-l-violet bg-card p-6 transition-all duration-700 hover:-translate-y-2 hover:shadow-glow-v ${
-                visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-            >
-              <div className="text-4xl" aria-hidden="true">{category.icon}</div>
-              <h3 className="mt-5 font-display text-xl font-bold text-white">{category.name}</h3>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span key={skill} className="rounded border border-teal/30 bg-teal/5 px-2 py-1 font-mono text-xs text-teal">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </article>
+            <StaggerItem key={category.name} className={index < 3 ? 'xl:col-span-2' : index === 3 ? 'xl:col-span-3' : 'xl:col-span-3'}>
+              <TiltCard className="h-full rounded-2xl border border-border-dim bg-card p-6 transition-colors duration-300 hover:border-white/20 sm:p-7">
+                <div className="relative z-20 flex items-start justify-between">
+                  <div className={`flex h-11 w-11 items-center justify-center rounded-xl border ${category.accent === 'teal' ? 'border-teal/25 bg-teal/[0.07] text-teal' : 'border-violet/25 bg-violet/[0.07] text-violet'}`}>
+                    <TechIcon name={category.icon} />
+                  </div>
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-text-muted">{category.code}</span>
+                </div>
+                <div className="relative z-20 mt-8">
+                  <div className="mb-4 flex items-center gap-2" aria-hidden="true">
+                    <motion.span className={`h-1.5 w-1.5 rounded-full ${category.accent === 'teal' ? 'bg-teal' : 'bg-violet'}`} whileHover={{ scale: 1.4 }} />
+                    <span className="h-px flex-1 bg-gradient-to-r from-border-dim to-transparent" />
+                    <span className="h-2 w-2 rotate-45 border border-border-dim" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-white sm:text-2xl">{category.name}</h3>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <span key={skill} className="rounded-md border border-white/[0.07] bg-void/55 px-2.5 py-1.5 font-mono text-[10px] text-text-muted transition group-hover:text-text-prime sm:text-xs">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              </TiltCard>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );
-};
-
-export default Skills;
+}

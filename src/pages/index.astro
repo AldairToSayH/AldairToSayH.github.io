@@ -13,14 +13,14 @@ import Footer from '../components/Footer';
 
 <Layout>
   <Navbar client:load />
-  <main>
-    <Hero client:load />
-    <About client:load />
-    <Skills client:load />
-    <Experience client:load />
-    <Certifications client:load />
-    <Projects client:load />
+  <main id="main-content">
+    <Hero client:idle />
+    <About client:visible />
+    <Skills client:visible />
+    <Experience client:visible />
+    <Certifications client:visible />
+    <Projects client:visible />
     <Contact client:load />
   </main>
-  <Footer client:load />
+  <Footer />
 </Layout>

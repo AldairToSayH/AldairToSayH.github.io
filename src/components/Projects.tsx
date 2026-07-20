@@ -1,94 +1,101 @@
-import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { StaggerGroup, StaggerItem } from './motion/StaggerGroup';
+import SectionHeading from './ui/SectionHeading';
+import TiltCard from './ui/TiltCard';
 
 const projects = [
   {
     title: 'APU Luxury',
+    type: 'Marketplace · Proyecto principal',
     description: 'Marketplace e-commerce multi-tenant para vendedores, artesanos, emprendedores y compradores.',
     tags: ['Next.js', 'React', 'Node.js', 'PostgreSQL'],
-    icon: 'APU',
     website: 'https://apuluxury.com',
     github: 'https://github.com/AldairToSayH/apu-luxury-last',
-    disabled: false,
+    status: 'En línea',
+    visual: 'commerce' as const,
+    featured: true,
   },
   {
     title: 'Sitio Portafolio',
-    description: 'Portafolio personal creado con Astro, React y Tailwind CSS. Totalmente estatico y desplegado en GitHub Pages.',
+    type: 'Experiencia web · Personal',
+    description: 'Portafolio personal creado con Astro, React y Tailwind CSS. Totalmente estático y desplegado en GitHub Pages.',
     tags: ['Astro', 'React', 'Tailwind CSS', 'TypeScript'],
-    icon: 'AZ',
     website: '',
     github: 'https://github.com/AldairToSayH/aldairtosayh.github.io',
-    disabled: false,
+    status: 'En línea',
+    visual: 'portfolio' as const,
+    featured: false,
   },
   {
-    title: 'Proximo Proyecto',
-    description: 'Un nuevo proyecto esta en desarrollo. Pronto habra novedades.',
+    title: 'Próximo proyecto',
+    type: 'Investigación aplicada',
+    description: 'Un nuevo proyecto está en desarrollo. Próximamente habrá novedades.',
     tags: ['Python', 'Machine Learning'],
-    icon: 'ML',
     website: '',
     github: '',
-    disabled: true,
+    status: 'En desarrollo',
+    visual: 'machine' as const,
+    featured: false,
   },
 ];
 
-const Projects: React.FC = () => {
-  const revealRef = useScrollReveal<HTMLDivElement>();
-
+export default function Projects() {
   return (
-    <section id="projects" className="px-5 py-24 sm:px-8">
-      <div ref={revealRef} className="mx-auto max-w-7xl transition-all duration-700">
-        <div className="max-w-3xl">
-          <p className="font-mono text-sm font-semibold uppercase tracking-[0.24em] text-teal">// proyectos</p>
-          <h2 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Trabajo Seleccionado</h2>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <section id="projects" className="relative py-24 sm:py-32">
+      <div className="section-shell">
+        <SectionHeading index="06" eyebrow="proyectos" title="Sistemas pensados para funcionar en el mundo real." description="Una selección de productos y experimentos donde la arquitectura técnica acompaña una necesidad concreta." />
+        <StaggerGroup className="mt-12 grid gap-5 lg:grid-cols-2">
           {projects.map((project) => (
-            <article key={project.title} className="group overflow-hidden rounded-2xl border border-border-dim border-t-transparent bg-card transition-all duration-300 hover:-translate-y-2 hover:border-t-violet hover:shadow-glow-v">
-              <div className="flex h-48 items-center justify-center bg-gradient-to-br from-violet/35 via-card to-teal/25" role="img" aria-label={`Imagen representativa de ${project.title}`}>
-                <span className="rounded-2xl border border-white/10 bg-void/50 px-6 py-4 font-mono text-4xl font-bold text-white shadow-glow-v backdrop-blur">{project.icon}</span>
-              </div>
-              <div className="p-6">
-                <h3 className="font-display text-2xl font-bold text-white">{project.title}</h3>
-                <p className="mt-4 min-h-20 leading-7 text-text-muted">{project.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="rounded border border-teal/30 bg-teal/5 px-2 py-1 font-mono text-xs text-teal">{tag}</span>
-                  ))}
-                </div>
-                {project.disabled ? (
-                  <button type="button" disabled className="mt-6 w-full rounded-full border border-border-dim px-5 py-3 font-display text-sm font-bold uppercase tracking-[0.16em] text-text-muted opacity-60">
-                    En desarrollo
-                  </button>
-                ) : (
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                    {project.website && (
-                      <a
-                        href={project.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex flex-1 items-center justify-center rounded-full border border-teal px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.12em] text-teal transition hover:bg-teal hover:text-void focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
-                      >
-                        Ver página web
-                      </a>
-                    )}
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex flex-1 items-center justify-center rounded-full border border-violet px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.12em] text-violet transition hover:bg-violet hover:text-white focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:ring-offset-void"
-                    >
-                      Ver en GitHub
-                    </a>
+            <StaggerItem key={project.title} className={project.featured ? 'lg:col-span-2' : ''}>
+              <TiltCard className={`h-full rounded-3xl border border-border-dim bg-card ${project.featured ? 'lg:grid lg:grid-cols-[1.15fr_.85fr]' : ''}`}>
+                <ProjectVisual type={project.visual} featured={project.featured} />
+                <div className="relative z-20 flex h-full flex-col p-6 sm:p-8">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-violet">{project.type}</p>
+                    <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[9px] uppercase tracking-[0.14em] ${project.status === 'En línea' ? 'border-teal/20 bg-teal/[0.06] text-teal' : 'border-violet/20 bg-violet/[0.06] text-violet'}`}><span className="h-1.5 w-1.5 rounded-full bg-current" />{project.status}</span>
                   </div>
-                )}
-              </div>
-            </article>
+                  <h3 className={`mt-6 font-display font-bold tracking-[-0.035em] text-white ${project.featured ? 'text-4xl sm:text-5xl' : 'text-3xl'}`}>{project.title}</h3>
+                  <p className="mt-4 leading-7 text-text-muted">{project.description}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => <span key={tag} className="rounded-md border border-white/[0.07] bg-void/50 px-2.5 py-1.5 font-mono text-[10px] text-text-muted">{tag}</span>)}
+                  </div>
+                  <div className="mt-auto flex flex-wrap gap-3 pt-8">
+                    {project.website && <a href={project.website} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded-full bg-teal px-5 py-2.5 font-display text-sm font-bold text-void transition hover:-translate-y-0.5 hover:bg-[#2be0bd]">Visitar sitio ↗</a>}
+                    {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded-full border border-white/15 px-5 py-2.5 font-display text-sm font-bold text-text-prime transition hover:-translate-y-0.5 hover:border-violet/60 hover:text-violet">Repositorio ↗</a>}
+                    {!project.github && <span className="inline-flex min-h-11 items-center rounded-full border border-border-dim px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted">Próximamente</span>}
+                  </div>
+                </div>
+              </TiltCard>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );
-};
+}
 
-export default Projects;
+function ProjectVisual({ type, featured }: { type: 'commerce' | 'portfolio' | 'machine'; featured: boolean }) {
+  return (
+    <div className={`relative z-20 overflow-hidden border-b border-border-dim bg-void/65 ${featured ? 'min-h-72 lg:min-h-[31rem] lg:border-b-0 lg:border-r' : 'h-64'}`} role={type === 'commerce' ? undefined : 'img'} aria-label={type === 'commerce' ? undefined : `Portada abstracta del proyecto ${type}`}>
+      <div className="technical-grid absolute inset-0 opacity-60" />
+      {type === 'commerce' && (
+        <div className="absolute inset-5 flex items-center justify-center sm:inset-8 lg:inset-10">
+          <picture className="relative block aspect-[1904/950] w-full max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-[#080706] shadow-[0_24px_80px_rgba(0,0,0,.55)]">
+            <source srcSet="/image/home-apu.webp" type="image/webp" />
+            <img
+              src="/image/home-apu.png"
+              alt="Página de inicio del marketplace APU Luxury"
+              width="1904"
+              height="950"
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover transition duration-700 ease-out motion-safe:group-hover:scale-[1.012]"
+            />
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/[0.025]" aria-hidden="true" />
+          </picture>
+        </div>
+      )}
+      {type === 'portfolio' && <div className="absolute inset-8 flex items-center justify-center"><div className="w-full rounded-xl border border-violet/20 bg-[#0c0c12] p-5 font-mono text-[10px] leading-6 text-text-muted"><p className="text-teal">aldair@systems:~$</p><p className="mt-2"><span className="text-violet">const</span> profile = {'{'}</p><p className="pl-4">software: <span className="text-teal">true</span>,</p><p className="pl-4">security: <span className="text-teal">true</span>,</p><p className="pl-4">infrastructure: <span className="text-teal">true</span></p><p>{'}'}</p><span className="mt-3 block h-3 w-px animate-pulse bg-teal motion-reduce:animate-none" /></div></div>}
+      {type === 'machine' && <div className="absolute inset-0 flex items-center justify-center"><div className="relative h-40 w-52">{[[50,15],[20,55],[80,58],[38,88],[67,90]].map(([x,y],index)=><span key={index} className="absolute h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet/60 bg-void shadow-[0_0_15px_rgba(108,99,255,.25)]" style={{left:`${x}%`,top:`${y}%`}}/>)}<svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100"><path d="M50 15 20 55m30-40 30 43M20 55l18 33m42-30L67 90M20 55l47 35m13-32L38 88" fill="none" stroke="#6C63FF" strokeOpacity=".25"/></svg></div></div>}
+    </div>
+  );
+}

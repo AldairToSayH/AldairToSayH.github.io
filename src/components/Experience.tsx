@@ -1,82 +1,81 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { useRef } from 'react';
+import Reveal from './motion/Reveal';
+import SectionHeading from './ui/SectionHeading';
 
-const Experience: React.FC = () => {
-  const cardRef = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
+const experiences = [
+  {
+    period: 'MAY 2026 — ACTUALIDAD',
+    location: 'Cusco, Perú · Presencial',
+    company: 'Cámara de Comercio del Cusco',
+    role: 'Responsable de Producción y Logística',
+    current: true,
+    tags: ['Presencial', 'Prácticas laborales'],
+    items: [
+      <>Dinamización del Ecosistema Regional de Innovación y Emprendimiento <a href="https://innovasuyu.proinnovate.gob.pe/region-cusco/" target="_blank" rel="noopener noreferrer" className="font-semibold text-violet transition hover:text-teal">DER Cusco 3.0</a>.</>,
+      <>Capacitación a gremios empresariales en la adopción de tecnologías aplicadas al turismo y la agroindustria.</>,
+      <>Coordinación de mesas de trabajo entre la academia, el sector privado y las entidades estatales.</>,
+      <>Promoción del escalamiento de emprendimientos regionales hacia mercados nacionales e internacionales.</>,
+      <>Administración y canalización de fondos concursables para transformación digital y economía circular.</>,
+    ],
+  },
+  {
+    period: 'NOV 2024 — ENE 2025',
+    location: 'Pisac, Cusco',
+    company: 'CONSORCIO HZ Pisac',
+    role: 'Responsable de Base de Datos y Soporte TI',
+    current: false,
+    tags: ['SQL Server', 'Soporte TI'],
+    items: [
+      <>Optimicé la gestión de datos con SQL Server, asegurando disponibilidad continua y respaldo de información crítica.</>,
+      <>Fortalecí la infraestructura TI y la administración de red interna para mantener la continuidad operativa diaria.</>,
+      <>Agilicé la logística de almacén integrando herramientas digitales para mejorar el control operacional.</>,
+    ],
+  },
+];
 
-  useEffect(() => {
-    const node = cardRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.22 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+export default function Experience() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start 75%', 'end 70%'] });
+  const lineScale = useSpring(useTransform(scrollYProgress, [0, 1], [0, 1]), { stiffness: 95, damping: 28 });
 
   return (
-    <section id="experience" className="px-5 py-24 sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="font-mono text-sm font-semibold uppercase tracking-[0.24em] text-teal">// experiencia</p>
-          <h2 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">Trayectoria Profesional</h2>
-        </div>
-
-        <div className="relative mt-14 pl-8 sm:pl-12">
-          <div className="absolute left-2 top-0 h-full w-px bg-violet shadow-glow-v sm:left-4" aria-hidden="true" />
-
-          <div className="grid gap-8">
-            <div className="relative">
-              <div className="absolute -left-8 top-8 h-4 w-4 rounded-full border-4 border-void bg-teal shadow-glow-t sm:-left-10" aria-hidden="true" />
-              <article
-                ref={cardRef}
-                className={`rounded-2xl border border-teal/40 bg-card p-6 shadow-[0_0_28px_rgba(0,212,170,0.14)] transition-all duration-700 sm:p-8 ${visible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
-                  }`}
-              >
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-full bg-teal/15 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-teal">MAY 2026 — ACTUALIDAD</span>
-                  <span className="font-mono text-sm text-text-muted">Cusco, Perú · Presencial</span>
+    <section id="experience" ref={sectionRef} className="relative py-24 sm:py-32">
+      <div className="section-shell">
+        <SectionHeading index="04" eyebrow="experiencia" title="Trayectoria aplicada a problemas reales." />
+        <div className="relative mt-14 sm:mt-16">
+          <div className="absolute bottom-0 left-[7px] top-1 w-px bg-border-dim sm:left-[11.5rem]" aria-hidden="true" />
+          <motion.div className="absolute left-[7px] top-1 h-full w-px origin-top bg-gradient-to-b from-teal via-violet to-violet/20 sm:left-[11.5rem]" style={{ scaleY: reduceMotion ? 1 : lineScale }} aria-hidden="true" />
+          <div className="grid gap-12 sm:gap-16">
+            {experiences.map((experience, index) => (
+              <Reveal key={experience.company} delay={index * 0.08} direction="right">
+                <div className="relative grid gap-5 pl-8 sm:grid-cols-[9.5rem_1fr] sm:gap-12 sm:pl-0">
+                  <div className="sm:text-right">
+                    <p className={`font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.12em] ${experience.current ? 'text-teal' : 'text-violet'}`}>{experience.period}</p>
+                    <p className="mt-2 font-mono text-[10px] leading-5 text-text-muted">{experience.location}</p>
+                  </div>
+                  <span className={`absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-[4px] border-void sm:left-[11.05rem] ${experience.current ? 'bg-teal shadow-[0_0_0_5px_rgba(0,212,170,.1)]' : 'bg-violet shadow-[0_0_0_5px_rgba(108,99,255,.1)]'}`} aria-hidden="true" />
+                  <article className="relative rounded-2xl border border-border-dim bg-card/80 p-6 sm:p-8">
+                    <div className="absolute right-5 top-5 font-mono text-[9px] tracking-[0.2em] text-text-muted" aria-hidden="true">0{index + 1}</div>
+                    <h3 className="pr-10 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">{experience.company}</h3>
+                    <p className="mt-2 text-base font-semibold text-teal sm:text-lg">{experience.role}</p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {experience.current && <span className="rounded-full border border-teal/25 bg-teal/[0.07] px-3 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-teal">Actual</span>}
+                      {experience.tags.map((tag) => <span key={tag} className="rounded-full border border-white/[0.07] px-3 py-1 font-mono text-[9px] text-text-muted">{tag}</span>)}
+                    </div>
+                    <ul className="mt-7 grid gap-4 text-sm leading-7 text-text-muted sm:text-base">
+                      {experience.items.map((item, itemIndex) => (
+                        <li key={itemIndex} className="flex gap-3"><span className="mt-3 h-1.5 w-1.5 shrink-0 rotate-45 bg-violet" aria-hidden="true" /><span>{item}</span></li>
+                      ))}
+                    </ul>
+                  </article>
                 </div>
-                <h3 className="mt-6 font-display text-3xl font-bold text-white">Cámara de Comercio del Cusco</h3>
-                <p className="mt-2 text-lg font-semibold text-teal">Responsable de Producción y Logística</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-teal/40 bg-teal/10 px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-teal">ACTUAL</span>
-                  <span className="rounded-full border border-violet/30 bg-violet/10 px-3 py-1 font-mono text-xs text-violet">Presencial</span>
-                  <span className="rounded-full border border-violet/30 bg-violet/10 px-3 py-1 font-mono text-xs text-violet">Prácticas laborales</span>
-                </div>
-                <ul className="mt-6 space-y-4 text-text-muted">
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Dinamización del Ecosistema Regional de Innovación y Emprendimiento <a href="https://innovasuyu.proinnovate.gob.pe/region-cusco/" target="_blank" rel="noopener noreferrer" className="font-semibold text-violet">DER Cusco 3.0</a>  </li>
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Capacitar a los gremios empresariales en la adopción de tecnologías aplicadas al turismo y la agroindustria.</li>
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Coordinar mesas de trabajo entre la academia, el sector privado y las entidades estatales.</li>
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Promover el escalamiento de los emprendimientos regionales hacia mercados nacionales e internacionales.</li>
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Administrar y canalizar fondos concursables dirigidos a la transformación digital y economía circular.</li>
-                </ul>
-              </article>
-            </div>
-
-            <div className="relative">
-              <div className="absolute -left-8 top-8 h-4 w-4 rounded-full border-4 border-void bg-violet shadow-glow-v sm:-left-10" aria-hidden="true" />
-              <article
-                className={`rounded-2xl border border-border-dim bg-card p-6 transition-all duration-700 sm:p-8 ${visible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
-                  }`}
-              >
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-full bg-violet/15 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-violet">Nov 2024 - Ene 2025</span>
-                  <span className="font-mono text-sm text-text-muted">Pisac, Cusco</span>
-                </div>
-                <h3 className="mt-6 font-display text-3xl font-bold text-white">CONSORCIO HZ Pisac</h3>
-                <p className="mt-2 text-lg font-semibold text-teal">Responsable de Base de Datos y Soporte TI</p>
-                <ul className="mt-6 space-y-4 text-text-muted">
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Optimice la gestion de datos del consorcio con SQL Server, asegurando disponibilidad continua y respaldo de informacion critica.</li>
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Fortaleci la infraestructura TI y la administracion de red interna para mantener la continuidad operativa diaria.</li>
-                  <li className="flex gap-3 leading-7"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-teal" />Agilice la logistica de almacen mediante la integracion de nuevas herramientas digitales, mejorando el control operacional.</li>
-                </ul>
-              </article>
-            </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Experience;
+}

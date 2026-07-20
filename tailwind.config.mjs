@@ -4,13 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        void: '#0A0A0F',
-        card: '#12121A',
-        'border-dim': '#1E1E2E',
+        void: '#000000',
+        card: '#090909',
+        raised: '#111111',
+        'border-dim': '#242424',
         violet: '#6C63FF',
         teal: '#00D4AA',
         'text-prime': '#F0F0F0',
-        'text-muted': '#8A8A9A',
+        'text-muted': '#929292',
         'glow-v': '#6C63FF33',
       },
       fontFamily: {
@@ -19,8 +20,8 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        'glow-v': '0 0 20px #6C63FF44',
-        'glow-t': '0 0 20px #00D4AA44',
+        'glow-v': '0 18px 48px #6C63FF18',
+        'glow-t': '0 18px 48px #00D4AA14',
       },
       backgroundImage: {
         'radial-violet': 'radial-gradient(circle at center, #6C63FF33, transparent 38%)',
