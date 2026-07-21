@@ -6,7 +6,7 @@ const certifications = [
   { name: 'Ciberseguridad en Pentesting Web (C|PW)', institution: 'UNI Lima', year: '2025', href: 'https://certificados.uni.edu.pe/verificador/search.php?cert_id=cert_029e360048d4ed7ce38a243ecca9a5db', area: 'SECURITY' },
   { name: 'Hacking Ético + IA (C|EH)', institution: 'UNI Lima', year: '2025', href: 'https://certificados.uni.edu.pe/verificador/search.php?cert_id=cert_31f22992ae51d4dd9995de843471147d', area: 'SECURITY' },
   { name: 'Machine Learning con Python + IA', institution: 'UNI Lima', year: '2025', href: 'https://certificados.uni.edu.pe/verificador/search.php?cert_id=cert_7da9715547cc1270c5ad9e9d912fe550', area: 'DATA' },
-  { name: 'CCNA: Introducción a Redes', institution: 'Universidad Continental', year: '2025', href: 'https://www.linkedin.com/in/juan-aldair-zavala-huacarpuma-b18a68378/overlay/Certifications/1170923358/treasury/?profileId=ACoAAF1q2kQBjw7tE_hoGdF3s7dbu2G62z8bpq0', area: 'NETWORKS' },
+  { name: 'CCNA: Introducción a Redes', institution: 'Universidad Continental', year: '2025', href: 'https://media.licdn.com/dms/image/v2/D4D2DAQG-GATUdlAFhA/profile-treasury-document-images_1280/B4DZ3Fym.NHIAU-/1/1777139873199?e=1785369600&v=beta&t=sgsjZ9tD5DwInf6DSxMrlreDhEvNHKQV599EMoSJ6hs', area: 'NETWORKS' },
 ];
 
 export default function Certifications() {
