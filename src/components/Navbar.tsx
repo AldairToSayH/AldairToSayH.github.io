@@ -67,7 +67,9 @@ export default function Navbar() {
     <header className={`fixed inset-x-0 top-0 z-50 border-b transition duration-300 ${isOpen ? 'border-border-dim bg-[#050505] shadow-[0_12px_50px_rgba(0,0,0,.75)]' : scrolled ? 'border-border-dim bg-black/[0.92] shadow-[0_10px_40px_rgba(0,0,0,.35)] backdrop-blur-xl' : 'border-transparent bg-transparent'}`}>
       <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Navegación principal">
         <button type="button" onClick={() => handleNavigate('#home')} className="group flex items-center gap-3 rounded-md font-mono font-bold" aria-label="Ir al inicio">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-violet/25 bg-violet/[0.07] text-sm text-violet transition group-hover:border-teal/40 group-hover:text-teal">AZ</span>
+          <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg border border-violet/35 bg-black transition group-hover:border-teal/45">
+            <img src="/image/me.gif" alt="" width="184" height="184" className="h-full w-full scale-[1.08] object-cover" />
+          </span>
           <span className="hidden text-[10px] uppercase tracking-[0.18em] text-text-muted sm:block">System portfolio</span>
         </button>
 
