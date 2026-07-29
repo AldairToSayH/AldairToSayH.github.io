@@ -35,7 +35,7 @@ export default function About() {
           <SectionHeading index="02" eyebrow="sobre mí" title="Tecnología con estructura, seguridad y propósito." />
           <Reveal delay={0.08}>
             <p className="mt-7 text-base leading-8 text-text-muted sm:text-lg">
-              Soy Juan Aldair Zavala, estudiante de Ingeniería de Sistemas e Informática en la Universidad Continental, actualmente en octavo semestre. Vivo en Cusco, Perú, y desarrollo soluciones donde convergen la ciberseguridad, el software, los datos y la infraestructura TI.
+              Soy Juan Aldair Zavala, estudiante de Ingeniería de Sistemas e Informática, actualmente en octavo semestre. Vivo en Cusco, Perú, y desarrollo soluciones donde convergen la ciberseguridad, el software, los datos y la infraestructura TI.
             </p>
             <p className="mt-4 text-base leading-8 text-text-muted sm:text-lg">
               Me enfoco en crear sistemas confiables, proteger entornos digitales y transformar ideas técnicas en resultados claros para personas y organizaciones.
