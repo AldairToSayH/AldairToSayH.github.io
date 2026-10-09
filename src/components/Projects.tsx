@@ -9,7 +9,7 @@ const projects = [
     description: 'Marketplace e-commerce multi-tenant para vendedores, artesanos, emprendedores y compradores.',
     tags: ['Next.js', 'React', 'Node.js', 'PostgreSQL'],
     website: 'https://apuluxury.com',
-    github: 'https://github.com/AldairToSayH/apu-luxury-last',
+    github: 'https://github.com/apu-luxury',
     status: 'En línea',
     visual: 'commerce' as const,
     featured: true,
