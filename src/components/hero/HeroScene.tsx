@@ -107,9 +107,6 @@ export default function HeroScene() {
           </Canvas>
         </SceneBoundary>
       )}
-      <div className="pointer-events-none absolute bottom-[9%] right-[13%] hidden items-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-black/65 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-text-muted backdrop-blur lg:flex" aria-hidden="true">
-        <span className="h-1.5 w-1.5 rounded-full bg-white/70" /> Arrastra para explorar
-      </div>
     </div>
   );
 }

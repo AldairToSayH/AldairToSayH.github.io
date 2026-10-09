@@ -9,9 +9,7 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border-dim to-transparent" aria-hidden="true" />
       <div className="section-shell pointer-events-none relative z-10 grid min-w-0 items-center gap-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-2">
         <HeroContent />
-        <div className="relative order-last h-[23rem] min-w-0 sm:h-[30rem] lg:h-[39rem]">
-          <div className="absolute left-4 top-10 font-mono text-[9px] uppercase tracking-[0.2em] text-violet/60 sm:left-8" aria-hidden="true">Visual system / 01</div>
-        </div>
+        <div className="relative order-last h-[23rem] min-w-0 sm:h-[30rem] lg:h-[39rem]" aria-hidden="true" />
       </div>
     </section>
   );

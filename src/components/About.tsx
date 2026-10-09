@@ -32,7 +32,7 @@ export default function About() {
           </div>
         </Reveal>
         <div className="order-1 lg:order-2">
-          <SectionHeading index="02" eyebrow="sobre mí" title="Tecnología con estructura, seguridad y propósito." />
+          <SectionHeading title="Tecnología con estructura, seguridad y propósito." />
           <Reveal delay={0.08}>
             <p className="mt-7 text-base leading-8 text-text-muted sm:text-lg">
               Soy Juan Aldair Zavala, estudiante de Ingeniería de Sistemas e Informática, actualmente en octavo semestre. Vivo en Cusco, Perú, y desarrollo soluciones donde convergen la ciberseguridad, el software, los datos y la infraestructura TI.

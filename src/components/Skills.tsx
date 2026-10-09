@@ -17,8 +17,6 @@ export default function Skills() {
     <section id="skills" className="relative border-y border-white/[0.035] bg-card/[0.22] py-24 sm:py-32">
       <div className="section-shell">
         <SectionHeading
-          index="03"
-          eyebrow="habilidades"
           title="Capacidades conectadas, no herramientas aisladas."
           description="Un stack práctico para analizar riesgos, construir soluciones y sostener infraestructura digital."
         />

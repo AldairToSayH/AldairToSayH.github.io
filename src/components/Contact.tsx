@@ -81,8 +81,7 @@ export default function Contact() {
       <div className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-teal/[0.06] blur-3xl" aria-hidden="true" />
       <div className="section-shell relative grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
         <Reveal direction="left">
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.24em] text-teal"><span className="text-violet">07</span> / contacto</p>
-          <h2 className="mt-4 text-balance font-display text-4xl font-bold tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">Construyamos algo que importe.</h2>
+          <h2 className="text-balance font-display text-4xl font-bold tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">Construyamos algo que importe.</h2>
           <p className="mt-6 text-base leading-8 text-text-muted sm:text-lg">Si tienes una oportunidad, colaboración o idea técnica relacionada con seguridad, software o infraestructura, conversemos.</p>
           <div className="mt-9 grid gap-2">
             {socials.map((social) => (

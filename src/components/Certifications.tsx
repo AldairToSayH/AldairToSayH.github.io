@@ -16,7 +16,7 @@ export default function Certifications() {
     <section id="certifications" className="relative border-y border-white/[0.035] bg-card/[0.18] py-24 sm:py-32">
       <div className="section-shell">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <SectionHeading index="05" eyebrow="certificaciones" title="Aprendizaje verificado y en evolución." />
+          <SectionHeading title="Aprendizaje verificado y en evolución." />
           <p className="max-w-sm font-mono text-[10px] uppercase leading-6 tracking-[0.17em] text-text-muted">Credenciales externas · enlaces de verificación disponibles</p>
         </div>
         <StaggerGroup className="mt-12 grid gap-4 md:grid-cols-2">

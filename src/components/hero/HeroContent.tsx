@@ -52,14 +52,7 @@ export default function HeroContent() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: reduceMotion ? 0 : 0.72, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="inline-flex items-center gap-3 rounded-full border border-teal/20 bg-teal/[0.06] px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-teal sm:text-xs">
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-50 motion-reduce:hidden" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
-        </span>
-        Disponible para proyectos y oportunidades
-      </div>
-      <p className="mt-8 font-mono text-xs font-semibold uppercase tracking-[0.28em] text-violet sm:text-sm">Systems · Software · Security</p>
+      <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-violet sm:text-sm">Systems · Software · Security</p>
       <h1 className="mt-5 text-balance font-display text-[clamp(3.4rem,9vw,6.9rem)] font-bold leading-[0.9] tracking-[-0.065em] text-white">
         Aldair <span className="text-text-muted">Zavala</span>
       </h1>

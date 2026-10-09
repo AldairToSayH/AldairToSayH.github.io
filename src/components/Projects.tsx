@@ -42,7 +42,7 @@ export default function Projects() {
   return (
     <section id="projects" className="relative py-24 sm:py-32">
       <div className="section-shell">
-        <SectionHeading index="06" eyebrow="proyectos" title="Sistemas pensados para funcionar en el mundo real." description="Una selección de productos y experimentos donde la arquitectura técnica acompaña una necesidad concreta." />
+        <SectionHeading title="Sistemas pensados para funcionar en el mundo real." description="Una selección de productos y experimentos donde la arquitectura técnica acompaña una necesidad concreta." />
         <StaggerGroup className="mt-12 grid gap-5 lg:grid-cols-2">
           {projects.map((project) => (
             <StaggerItem key={project.title} className={project.featured ? 'lg:col-span-2' : ''}>

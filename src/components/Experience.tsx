@@ -43,7 +43,7 @@ export default function Experience() {
   return (
     <section id="experience" ref={sectionRef} className="relative py-24 sm:py-32">
       <div className="section-shell">
-        <SectionHeading index="04" eyebrow="experiencia" title="Trayectoria aplicada a problemas reales." />
+        <SectionHeading title="Trayectoria aplicada a problemas reales." />
         <div className="relative mt-14 sm:mt-16">
           <div className="absolute bottom-0 left-[7px] top-1 w-px bg-border-dim sm:left-[11.5rem]" aria-hidden="true" />
           <motion.div className="absolute left-[7px] top-1 h-full w-px origin-top bg-gradient-to-b from-teal via-violet to-violet/20 sm:left-[11.5rem]" style={{ scaleY: reduceMotion ? 1 : lineScale }} aria-hidden="true" />
