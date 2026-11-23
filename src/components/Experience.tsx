@@ -14,9 +14,6 @@ const experiences = [
     items: [
       <>Dinamización del Ecosistema Regional de Innovación y Emprendimiento <a href="https://innovasuyu.proinnovate.gob.pe/region-cusco/" target="_blank" rel="noopener noreferrer" className="font-semibold text-violet transition hover:text-teal">DER Cusco 3.0</a>.</>,
       <>Capacitación a gremios empresariales en la adopción de tecnologías aplicadas al turismo y la agroindustria.</>,
-      <>Coordinación de mesas de trabajo entre la academia, el sector privado y las entidades estatales.</>,
-      <>Promoción del escalamiento de emprendimientos regionales hacia mercados nacionales e internacionales.</>,
-      <>Administración y canalización de fondos concursables para transformación digital y economía circular.</>,
     ],
   },
   {
