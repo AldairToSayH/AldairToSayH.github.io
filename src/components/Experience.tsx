@@ -10,7 +10,7 @@ const experiences = [
     company: 'Cámara de Comercio del Cusco',
     role: 'Responsable de Producción y Logística',
     current: true,
-    tags: ['Presencial', 'Prácticas laborales'],
+    tags: ['Presencial', 'Part-time'],
     items: [
       <>Dinamización del Ecosistema Regional de Innovación y Emprendimiento <a href="https://innovasuyu.proinnovate.gob.pe/region-cusco/" target="_blank" rel="noopener noreferrer" className="font-semibold text-violet transition hover:text-teal">DER Cusco 3.0</a>.</>,
       <>Capacitación a gremios empresariales en la adopción de tecnologías aplicadas al turismo y la agroindustria.</>,
